@@ -39,7 +39,6 @@
                     <applicationName>${appname}</applicationName>
                     <environment>${env}</environment>
                     <businessGroup>${business}</businessGroup>
-                    <region>${region}</region>
                     <workers>${workers}</workers>
                     <workerType>${vCore}</workerType>
                     <objectStoreV2>$true</objectStoreV2>
