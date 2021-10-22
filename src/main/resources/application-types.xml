@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="tickets" format="json">
+      <types:shape format="weave" example="examples/ticket.json"><![CDATA[%dw 2.0
+
+type tickets = {|
+  movieName: String, 
+  theatreName: String, 
+  noOfTickets: Number {"typeId": "int"}, 
+  timing: String, 
+  location: String
+|} {"example": "{\\\"movieName\\\":\\\"Black\\\",\\\"theatreName\\\":\\\"ER38sd\\\",\\\"noOfTickets\\\":3,\\\"timing\\\":\\\"2pm\\\",\\\"location\\\":\\\"Bhubaneswar\\\"}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="number" format="java">
+      <types:shape format="raml"><![CDATA[#%RAML 1.0 DataType
+type: number]]></types:shape>
+    </types:type>
+    <types:type name="xml" format="xml">
+      <types:example format="xml" element="Result" location="examples/add.xml"/>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#81ac2735-c33d-48c4-9ef3-50bee6bd538a">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="tickets"/>
+        </types:message>
+      </types:input-event>
+      <types:output-event>
+        <types:message>
+          <types:payload type="tickets"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#896f098b-81ca-4a6b-8e9d-6768d11ead40"/>
+  <types:enrichment select="#6e899ec2-5dfb-4be6-8d9e-1c1eb8e912ac">
+    <types:processor-declaration>
+      <types:output-event>
+        <types:message>
+          <types:payload type="xml"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>
